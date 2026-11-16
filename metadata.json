@@ -1,0 +1,6 @@
+{
+  "name": "LAYER-X Neural Interface",
+  "description": "Series showcase for the Layer-X Neural Interface and MS-01 Neural Core hardware.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
