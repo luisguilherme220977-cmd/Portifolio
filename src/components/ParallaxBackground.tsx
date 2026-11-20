@@ -7,10 +7,9 @@ export const ParallaxBackground: React.FC = () => {
   const lightRef = useRef<HTMLDivElement>(null);
 
   // Helper to set transform on a layer based on depth factor
-  const setLayerTransform = (el: HTMLDivElement, x: number, y: number, depth: number) => {
-    const translateX = x * depth;
+  const setLayerTransform = (el: HTMLDivElement, y: number, depth: number) => {
     const translateY = y * depth;
-    el.style.transform = `translate3d(${translateX}px, ${translateY}px, 0)`;
+    el.style.transform = `translate3d(0, ${translateY}px, 0)`;
   };
 
   useEffect(() => {
@@ -22,12 +21,11 @@ export const ParallaxBackground: React.FC = () => {
     const handleMouseMove = (e: MouseEvent) => {
       cancelAnimationFrame(rafId);
       rafId = requestAnimationFrame(() => {
-        const normX = (e.clientX / window.innerWidth - 0.5) * 30; // max translate ~15px each side
         const normY = (e.clientY / window.innerHeight - 0.5) * 30;
         // Update each layer with its depth factor
         layerRefs.current.forEach((layer, i) => {
           const depth = 0.2 + i * 0.15; // increasing depth per layer
-          setLayerTransform(layer, normX, normY, depth);
+          setLayerTransform(layer, normY, depth);
         });
         // Position radial light
         if (lightRef.current) {
